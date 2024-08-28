@@ -546,3 +546,46 @@ Transact:
         }
     }
 }
+
+//-----------------------------------------------------------------Function for Other networks--------------------------------------------------------------------//
+
+void otherNetworks() {
+
+    cout << endl;
+    cout << endl;
+
+    while (true) {
+        int reply;
+        cout << "------------------------------------------------------------------ Send To Other networks ------------------------------------------------------------------" << endl;
+        cout << endl;
+        cout << "1. Vodafone" << endl;
+        cout << "2. MTN" << endl;
+        cout << "3. AirtelTigo" << endl;
+        cout << "0. Go back" << endl;
+        cout << endl;
+        cout << "Select option: "; cin >> reply;
+
+        if (reply == 1) {
+            checkNumber("Vodafone", "020", "050");
+            return;
+        }
+        else if (reply == 2) {
+            checkNumber("MTN", "024", "054");
+            return;
+        }
+        else if (reply == 3) {
+            checkNumber("AirtelTigo", "026", "027");
+            return;
+        }
+        else if (reply == 0) {
+            userPanel();
+        }
+        else {
+            cout << endl;
+            cout << "Invalid option. Please try again." << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+            cout << endl;
+        }
+    }
+
+}
