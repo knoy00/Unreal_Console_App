@@ -358,3 +358,191 @@ void sendMoney() {
     }
 
 }
+
+
+//-------------------------------------------------------------------Function for FASTMO---------------------------------------------------------------------------//
+
+void fastMO() {
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    string phoneNumber;
+    string confirmPhoneNumber;
+
+    cout << endl;
+    cout << endl;
+    cout << "------------------------------------------------------------------ Send To FastMO User ---------------------------------------------------------------------" << endl;
+    cout << endl;
+
+Transact:
+    while (true) {
+        cout << "Enter recipient phone number (10 digits)" << endl;
+
+        cout << "Enter here: ";  cin >> phoneNumber;
+
+        cout << endl;
+        if (phoneNumber.length() == 10 && regex_match(phoneNumber, regex("[0-9]+"))) {
+
+            while (true) {
+                cout << "Re-enter recipient number" << endl;
+
+
+                cout << "Enter here: ";  cin >> confirmPhoneNumber;
+
+                if (phoneNumber == confirmPhoneNumber) {
+
+                    while (true) {
+                        string amount;
+                        double amountNum;
+                        cout << endl;
+
+
+                        cout << "Enter Amount" << endl;
+
+                        cout << "Enter here: ";  cin >> amount;
+
+                        if (regex_match(amount, regex("[0-9]+"))) {
+                            amountNum = stod(amount);
+                            double amountValid = amountNum <= userBalance();
+                            double amountLeft = userBalance() - amountNum;
+                            double taxCharge = taxes(amountNum, currentUserBalance);
+
+                            if (amountValid && taxCharge <= amountLeft) {
+                                int count = 0;
+                                while (count < 3) {
+                                    string userPin;
+                                    cout << endl;
+                                    cout << "Enter USER pin" << endl;
+
+                                    cout << "Enter here: "; cin >> userPin;
+
+                                    if (userPin == USER_PASSWORD) {
+                                        int count = 0;
+
+                                        while (true) {
+                                            int confirmTransaction;
+
+                                            cout << endl;
+
+                                            cout << "You are making a transaction of GHS " << amount << " to " << phoneNumber << endl;
+                                            cout << endl;
+
+                                            cout << "1. Confirm" << endl;
+                                            cout << "2. Cancel" << endl;
+
+                                            cout << "Enter here: "; cin >> confirmTransaction;
+                                            if (confirmTransaction == 1) {
+                                                cout << endl;
+                                                shortLoading();
+                                                cout << endl;
+                                                cout << endl;
+
+                                                double eLevy, transferFee;
+                                                eLevy = taxes(amountNum, currentUserBalance) / 2;
+                                                transferFee = taxes(amountNum, currentUserBalance) / 2;
+
+                                                info(transferFee, eLevy, amountNum, amount, phoneNumber);
+
+                                                while (true) {
+                                                    cout << "Would you like to perform another transaction?" << endl;
+                                                    cout << "(Y / N)" << endl;
+
+                                                    char newTransaction;
+                                                    cout << "Select Option: "; cin >> newTransaction;
+                                                    cout << endl;
+
+                                                    if (newTransaction == 'Y' || newTransaction == 'y') {
+                                                        load();
+                                                        while (true) {
+                                                            clearScreen();
+                                                            cout << endl;
+                                                            cout << "--------------------------------------------------------------------- SEND MONEY ---------------------------------------------------------------------------" << endl;
+                                                            cout << endl;
+                                                            goto Transact;
+                                                        }
+                                                    }
+
+                                                    else if (newTransaction == 'N' || newTransaction == 'n') {
+
+                                                        cout << "Returning to main menu. Please wait" << endl;
+                                                        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                                                        userPanel();
+                                                    }
+
+                                                    else {
+
+                                                        cout << endl;
+                                                        cout << "Enter a valid option." << endl;
+                                                        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                                                    }
+                                                }
+                                            }
+                                            else if (confirmTransaction == 2) {
+                                                cout << endl;
+                                                cout << endl;
+
+                                                cout << "Your transaction was cancelled.";
+                                                cout << endl;
+
+                                                cout << "Returning to main menu. Please wait" << endl;
+                                                std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+                                                return;
+                                            }
+                                            else {
+
+                                                return;
+                                            }
+
+                                            /* return;*/
+                                        }
+                                    }
+
+                                    else {
+                                        count++;
+                                        cout << endl;
+
+                                        SetConsoleTextAttribute(consoleHandle, BACKGROUND_RED);
+                                        cout << "Incorrect PIN.";
+                                        SetConsoleTextAttribute(consoleHandle, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+
+                                        cout << " You have " << (3 - count) << " tries left." << endl;
+                                    }
+                                }
+
+                                cout << endl;
+                                std::this_thread::sleep_for(chrono::milliseconds(2000));
+                                cout << "Too many tries." << endl;
+                                cout << "Logging out" << endl;
+                                cout << endl;
+                                loggingOut();
+                                main();
+                            }
+                            else {
+                                cout << endl;
+                                cout << "Your balance is insufficient to make this transaction. Your current balance is GHS " << currentUserBalance << endl;
+                                cout << "Try again." << endl;
+
+                            }
+                        }
+                        else {
+                            cout << endl;
+                            cout << "Enter a valid amount" << endl;
+                        }
+                    }
+                }
+                else {
+                    cout << endl;
+                    SetConsoleTextAttribute(consoleHandle, BACKGROUND_RED);
+
+                    cout << "Numbers do not match. Try again" << endl;
+
+                    SetConsoleTextAttribute(consoleHandle, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+                    cout << endl;
+                }
+            }
+        }
+        else {
+            cout << "Please enter a valid phone number" << endl;
+            cout << endl;
+        }
+    }
+}
