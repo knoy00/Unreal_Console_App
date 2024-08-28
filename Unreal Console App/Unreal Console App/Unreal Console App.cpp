@@ -311,3 +311,50 @@ void userPanel() {
         }
     }
 }
+
+//--------------------------------------------------------------Send money options and functios------------------------------------------------------------------------//
+void sendMoney() {
+    clearScreen();
+    cout << "--------------------------------------------------------------------- SEND MONEY ---------------------------------------------------------------------------" << endl;
+    cout << endl;
+
+    cout << "1. FastMO Cash User" << endl;
+    cout << "2. Mobile Network" << endl;
+    cout << "3. To Bank Account" << endl;
+    cout << "4. Unregistered FastMO Cash User" << endl;
+    cout << "5. Favorites" << endl;
+    cout << "0. Go Back" << endl;
+
+    while (true) {
+        string choice;
+        cout << endl;
+        cout << "Select option: ";
+        cin >> choice;
+
+        if (choice == "1") {
+            fastMO();
+        }
+        else if (choice == "2") {
+            otherNetworks();
+        }
+        else if (choice == "3") {
+            transactToBank();
+        }
+        else if (choice == "4") {
+            cout << "Sending money to Unregistered FastMO Cash User..." << endl;
+        }
+        else if (choice == "5") {
+            favorites();
+        }
+        else if (choice == "0") {
+            userPanel();
+        }
+        else {
+            cout << endl;
+            cout << "Invalid option. Please try again." << endl;
+            cout << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        }
+    }
+
+}
