@@ -589,3 +589,157 @@ void otherNetworks() {
     }
 
 }
+
+//-----------------------------------------------------------------Function for bank account----------------------------------------------------------------------//
+void bankAccount() {
+    cout << "---------------------------------------------------------------- Send To Bank Account ------------------------------------------------------------------" << endl;
+    cout << endl;
+    transactToBank();
+}
+
+//-----------------------------------------------------------------Function to clear screen-----------------------------------------------------------------------//
+void clearScreen() {
+#ifdef _WIN32
+    system("CLS");
+#else
+    cout << "\033[2J\033[1;1H";
+#endif
+}
+
+//-----------------------------------------------------------------Function to withdraw money--------------------------------------------------------------------//
+void withdrawMoney() {
+
+    while (true) {
+        clearScreen();
+        cout << "1. Withdraw from Agent" << endl;
+        cout << "2. Withdraw from ATM" << endl;
+        cout << endl;
+        string choice;
+    Withdraw_Menu:
+        cout << "Select option: ";
+        cin >> choice;
+
+        if (choice == "1") {
+            cout << endl;
+
+            while (true) {
+                string agentTill1;
+                string agentTill2;
+
+                cout << endl;
+                cout << "Enter agent till number (10 digits)" << endl;
+                cout << "Enter here: ";  cin >> agentTill1;
+                if (agentTill1.length() == 10 && regex_match(agentTill1, regex("[0-9]+"))) {
+                    cout << endl;
+
+                    while (true) {
+                        cout << "Re-enter agent till number (10 digits)" << endl;
+                        cout << "Enter here: ";  cin >> agentTill2;
+
+                        if (agentTill1 == agentTill2) {
+                            cout << endl;
+
+                            while (true) {
+                                string amount;
+                                double withdrawalAmount;
+
+                                cout << "Enter Amount" << endl;
+                                cout << "Enter here: "; cin >> amount;
+
+                                if (regex_match(amount, regex("[0-9]+"))) {
+                                    withdrawalAmount = stod(amount);
+
+                                    if (withdrawalAmount <= userBalance()) {
+
+                                        while (true) {
+                                            cout << endl;
+                                            string confirmWithdrawal;
+                                            cout << "You are making a withdrawal of GHS" << withdrawalAmount << " from agent " << agentTill1 << "." << endl;
+                                            cout << "1. Continue" << endl;
+                                            cout << "2. Cancel" << endl;
+                                            cout << endl;
+                                            cout << "Select option: ";
+                                            cin >> confirmWithdrawal;
+
+                                            if (confirmWithdrawal == "1") {
+                                                cout << endl;
+                                                currentUserBalance -= withdrawalAmount;
+
+                                                cout << "Withdrawal complete." << endl;
+                                                cout << "Your new balance is GHS" << currentUserBalance << endl;
+                                                std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+                                                cout << endl;
+                                                cout << endl;
+                                                cout << "Returning to main menu. Please wait" << endl;
+                                                std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                                                userPanel();
+                                            }
+
+                                            else if (confirmWithdrawal == "2") {
+                                                cout << endl;
+                                                cout << "Cancelling transaction. Please wait" << endl;
+                                                std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                                                cout << endl;
+                                                cout << endl;
+                                                cout << "Returning to main menu. Please wait." << endl;
+                                                std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+                                                userPanel();
+                                            }
+
+                                            else {
+                                                cout << endl;
+                                                cout << "Invalid input. Try again" << endl;
+                                                std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+                                                cout << endl;
+                                            }
+                                        }
+
+                                    }
+                                    else {
+                                        cout << endl;
+                                        cout << "Your balance is insufficient to make this transaction. Your current balance is GHS " << currentUserBalance << endl;
+                                        cout << "Try again." << endl;
+                                        cout << endl;
+                                    }
+                                }
+
+                                else {
+                                    cout << endl;
+                                    cout << "Invalid input. Try again" << endl;
+                                    cout << endl;
+                                }
+                            }
+
+                        }
+
+                        else {
+                            cout << endl;
+                            cout << "Numbers do not match. Try again" << endl;
+                            std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+                            cout << endl;
+                        }
+                    }
+                }
+                else {
+                    cout << endl;
+                    cout << "Invalid input. Try again" << endl;
+                    cout << endl;
+                }
+            }
+        }
+
+        else if (choice == "2") {
+            cout << endl;
+            cout << "" << endl;
+        }
+
+        else {
+            cout << endl;
+            cout << "Invalid input. Try again" << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+            cout << endl;
+
+        }
+    }
+
+}
