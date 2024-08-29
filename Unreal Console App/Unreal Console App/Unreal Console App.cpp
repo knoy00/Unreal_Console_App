@@ -743,3 +743,15 @@ void withdrawMoney() {
     }
 
 }
+
+void makePayments() {
+}
+
+void financialServices() {
+}
+
+
+//----------------------------------------------------------------Function for User Balance---------------------------------------------------------------------//
+double userBalance() {
+    return currentUserBalance;
+}
