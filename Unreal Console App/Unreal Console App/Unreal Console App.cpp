@@ -1055,3 +1055,81 @@ void transact() {
                                                     }
 
                                                 }
+                                                
+                                                
+                                            }
+                                            else if (confirmTransaction == 2) {
+                                                cout << endl;
+                                                cout << endl;
+
+                                                cout << "Your transaction was cancelled.";
+                                                cout << endl;
+
+                                                cout << "Returning to main menu. Please wait" << endl;
+                                                std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+                                                userPanel();
+                                            }
+                                            else {
+
+                                                return;
+                                            }
+
+                                            /* return;*/
+                                        }
+
+                                    }
+
+                                    else {
+                                        count++;
+                                        cout << endl;
+
+                                        SetConsoleTextAttribute(consoleHandle, BACKGROUND_RED);
+                                        cout << "Incorrect PIN.";
+                                        SetConsoleTextAttribute(consoleHandle, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+
+                                        cout << " You have " << (3 - count) << " tries left." << endl;
+                                    }
+
+
+                                }
+                                cout << endl;
+                                std::this_thread::sleep_for(chrono::milliseconds(2000));
+                                cout << "Too many tries." << endl;
+                                cout << "Logging out" << endl;
+                                cout << endl;
+                                loggingOut();
+                                main();
+
+                            }
+                            else {
+                                cout << endl;
+                                cout << "Your balance is insufficient to make this transaction. Your current balance is GHS " << currentUserBalance << endl;
+                                cout << "Try again." << endl;
+
+                            }
+                        }
+                        else {
+                            cout << endl;
+                            cout << "Enter a valid amount" << endl;
+                        }
+                    }
+
+                }
+                else {
+                    cout << endl;
+                    SetConsoleTextAttribute(consoleHandle, BACKGROUND_RED);
+
+                    cout << "Numbers do not match. Try again" << endl;
+
+                    SetConsoleTextAttribute(consoleHandle, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+                    cout << endl;
+                }
+            }
+
+        }
+        else {
+            cout << "Please enter a valid phone number" << endl;
+            cout << endl;
+        }
+    }
+}
