@@ -1244,3 +1244,38 @@ List:
                                                     goto List;
                                                 }
                                             }
+                                            
+                                                else if (newTransaction == 'N' || newTransaction == 'n') {
+
+                                                    cout << "Returning to main menu. Please wait" << endl;
+                                                    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+                                                    userPanel();
+                                                }
+
+                                                else {
+
+                                                    cout << endl;
+                                                    cout << "Enter a valid option." << endl;
+                                                    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+                                                }
+                                            }
+                                        }
+                                        else if (confirmTransaction == 2) {
+                                            cout << endl;
+                                            cout << endl;
+
+                                            cout << "Your transaction was cancelled.";
+                                            cout << endl;
+
+                                            cout << "Returning to main menu. Please wait" << endl;
+                                            std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+                                            return;
+                                        }
+                                        else {
+
+                                            return;
+                                        }
+
+                                        /* return;*/
+                                    }
+                                }
