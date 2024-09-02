@@ -1133,3 +1133,31 @@ void transact() {
         }
     }
 }
+
+
+//----------------------------------------------------------------Function to send to favorites----------------------------------------------------------------//
+void favorites() {
+    cout << endl;
+    cout << endl;
+    cout << "------------------------------------------------------------------ Send To Favorite ---------------------------------------------------------------------" << endl;
+    cout << endl;
+
+    if (favoriteNames.empty()) {
+        cout << "Your favorite list is empty" << endl;
+        cout << endl;
+        int input;
+        cout << "Press 0 to return to main menu" << endl;
+
+        while (true) {
+            cout << "Enter here: ";
+            cin >> input;
+
+            if (input == 0) {
+                userPanel();
+            }
+            else {
+                cout << endl;
+                cout << "Invalid Input. Try again." << endl;
+            }
+        }
+    }
