@@ -1161,3 +1161,86 @@ void favorites() {
             }
         }
     }
+    else {
+List:
+    int favInput;
+    cout << "Choose a number from your list" << endl;
+    for (int i = 0; i < favoriteNames.size(); i++) {
+        cout << endl;
+        cout << i + 1 << ". " << favoriteNames[i] << " - " << favoriteNumbers[i] << endl;
+    }
+    while (true) {                                                                                                   //while loop to select favorite option
+        cout << endl;
+        cout << "Enter here: ";
+        cin >> favInput;
+        cout << endl;
+
+        if (favInput <= favoriteNames.size()) {                                                                     //if statement to verify is input is within the list
+            while (true) {
+                string amount;
+                double amountNum;
+                cout << endl;
+                cout << "Enter Amount" << endl;
+                cout << "Enter here: "; cin >> amount;
+
+                if (regex_match(amount, regex("[0-9]+"))) {
+                    amountNum = stod(amount);
+
+                    if (amountNum <= userBalance()) {
+                        int count = 0;
+
+                        while (count < 3) {
+                            string userPin;
+                            cout << endl;
+                            cout << "Enter USER pin" << endl;
+
+                            cout << "Enter here: "; cin >> userPin;
+
+                            if (userPin == USER_PASSWORD) {
+                                int count = 0;
+
+                                while (true) {
+                                    int confirmTransaction;
+
+                                    cout << endl;
+
+                                    cout << "You are making a transaction of GHS " << amount << " to " << favoriteNumbers[favInput - 1] << endl;
+                                    cout << endl;
+
+                                    cout << "1. Confirm" << endl;
+                                    cout << "2. Cancel" << endl;
+
+                                    cout << "Enter here: "; cin >> confirmTransaction;
+                                    if (confirmTransaction == 1) {
+                                        cout << endl;
+                                        shortLoading();
+
+                                        cout << endl;
+                                        cout << endl;
+
+                                        currentUserBalance -= amountNum;
+                                        cout << "Your transcation was successful. You sent GHS " << amount << " to " << favoriteNumbers[favInput - 1] << "." << endl;
+                                        cout << "Your new balance is GHS" << currentUserBalance << endl;
+
+                                        cout << endl;
+                                        cout << endl;
+
+                                        while (true) {
+
+                                            cout << "Would you like to perform another transaction?" << endl;
+                                            cout << "(Y / N)" << endl;
+
+                                            char newTransaction;
+                                            cout << "Select Option: "; cin >> newTransaction;
+                                            cout << endl;
+
+                                            if (newTransaction == 'Y' || newTransaction == 'y') {
+                                                load();
+                                                while (true) {
+                                                    clearScreen();
+                                                    cout << endl;
+                                                    cout << "--------------------------------------------------------------------- SEND MONEY ---------------------------------------------------------------------------" << endl;
+                                                    cout << endl;
+                                                    goto List;
+                                                }
+                                            }
