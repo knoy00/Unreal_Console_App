@@ -1279,3 +1279,42 @@ List:
                                         /* return;*/
                                     }
                                 }
+                                                                else {
+                                    count++;
+                                    cout << endl;
+
+                                    SetConsoleTextAttribute(consoleHandle, BACKGROUND_RED);
+                                    cout << "Incorrect PIN.";
+                                    SetConsoleTextAttribute(consoleHandle, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+
+                                    cout << " You have " << (3 - count) << " tries left." << endl;
+                                }
+                            }
+                            cout << endl;
+                            std::this_thread::sleep_for(chrono::milliseconds(2000));
+                            cout << "Too many tries." << endl;
+                            cout << "Logging out" << endl;
+                            cout << endl;
+                            loggingOut();
+                            main();
+                        }
+                        else {
+                            cout << endl;
+                            cout << "Your balance is insufficient to make this transaction. Your current balance is GHS " << currentUserBalance << endl;
+                            cout << "Try again." << endl;
+
+                        }
+                    }
+                    else {
+                        cout << endl;
+                        cout << "Enter a valid amount" << endl;
+                    }
+                }
+            }
+            else {
+                cout << endl;
+                cout << "Enter a valid number" << endl;
+            }
+        }
+    }
+}
