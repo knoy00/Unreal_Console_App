@@ -1354,5 +1354,53 @@ myAccount:
          	deleteFavorite(favoriteNumbers);
          	//remove contact
      	}
+     	
+     	 else if (choice == 3) {
+     //change credentials
+     int changeCred;
+     cout << endl;
+     cout << "1. Change password" << endl;
+     cout << "2. Change username" << endl;
+     cout << endl;
+
+     while (true) {
+         cout << "Enter here: ";
+         cin >> changeCred;
+
+         if (changeCred == 1) {
+             cout << endl;
+             cout << "Enter old password" << endl;
+
+             int count = 0;
+             while (count < 3) {
+                 string oldPass;
+                 cout << "Enter here: ";
+                 cin >> oldPass;
+                 if (oldPass == USER_PASSWORD) {
+
+                 Newpass:
+                     string newPass;
+                     cout << endl;
+                     cout << "Enter your new password" << endl;
+                     cout << "Enter here: ";
+                     cin >> newPass;
+
+                     while (true) {
+                         string confirmNewPass;
+                         cout << endl;
+                         cout << "Re-enter your new password" << endl;
+                         cout << "Enter here: ";
+                         cin >> confirmNewPass;
+
+                         if (newPass == confirmNewPass) {
+                             USER_PASSWORD = newPass;
+                             cout << endl;
+                             cout << "New password created!" << endl;
+                             std::this_thread::sleep_for(std::chrono::milliseconds(1300));
+                             cout << endl;
+                             cout << "Returning to main menu. Please wait." << endl;
+                             std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                             userPanel();
+                         }
  	}
 }
