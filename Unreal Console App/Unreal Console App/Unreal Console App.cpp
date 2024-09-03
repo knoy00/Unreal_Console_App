@@ -1318,3 +1318,41 @@ List:
         }
     }
 }
+
+//----------------------------------------------------------------Function for My Account Menu----------------------------------------------------------//
+void myAccount() {
+
+myAccount:
+    clearScreen();
+    cout << endl;
+    cout << endl;
+    cout << "---------------------------------------------------------------- My Account ---------------------------------------------------------------------------" << endl;
+    cout << endl;
+
+    cout << "1. Add new favorite" << endl;
+    cout << "2. Remove contact from favorite" << endl;
+    cout << "3. Change username or password" << endl;
+    cout << "4. Check balance" << endl;
+    cout << "0. Go back" << endl;
+    
+     while (true) {
+     	int choice;
+     	cout << endl;
+     	cout << "Enter here: ";
+     	cin >> choice;
+     	cin.ignore();
+
+     	if (choice == 1) {
+         	cout << endl;
+         	cout << "Enter name" << endl;
+
+         	while (true) {
+             	addFavorite();
+         	}
+     	}
+     	else if (choice == 2) {
+         	deleteFavorite(favoriteNumbers);
+         	//remove contact
+     	}
+ 	}
+}
