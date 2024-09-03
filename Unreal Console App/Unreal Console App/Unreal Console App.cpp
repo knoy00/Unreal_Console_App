@@ -1402,5 +1402,14 @@ myAccount:
                              std::this_thread::sleep_for(std::chrono::milliseconds(200));
                              userPanel();
                          }
+                          else {
+     						cout << endl;
+     						cout << "Password did not match. Try again" << endl;
+     						goto Newpass;
+ 						}
+ 					}
+				}	
+					                         
+                         
  	}
 }
