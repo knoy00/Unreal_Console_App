@@ -101,3 +101,34 @@ int main() {
     }
     return 0;
 }
+
+//------------------------------------------------------------------Loading screen-------------------------------------------------------------//
+void loading() {
+    for (int i = 0; i < 3; ++i) {
+        if (i == 1) {
+            cout << "Verified..." << endl;
+        }
+        else if (i == 2) {
+            SetConsoleTextAttribute(consoleHandle, BACKGROUND_GREEN);
+            cout << "Logged in successfully" << endl;
+            SetConsoleTextAttribute(consoleHandle, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+        }
+        else {
+            cout << "Verifying..." << endl;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    }
+}
+
+void shortLoading() {
+    for (int i = 0; i < 2; i++) {
+
+        if (i == 1) {
+            cout << "Transaction complete..." << endl;
+        }
+        else {
+            cout << "Sending. Please wait..." << endl;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    }
+}
