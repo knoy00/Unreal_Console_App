@@ -43,3 +43,61 @@ void deleteFavorite(vector <string> favoriteNumbers);
 
 vector <string> favoriteNames;
 vector <string> favoriteNumbers;
+
+
+//----------------------------------------------------------------loading function-----------------------------------------------------------------//
+void load();
+void shortLoading();
+void loading();
+
+//--------------------------------------------------------------------User Menu-------------------------------------------------------------------//
+void transactToBank();
+void sendMoney();
+void withdrawMoney();
+void makePayments();
+void financialServices();
+void transact();
+void favorites();
+
+//------------------------------------------------------------------MAIN FUNCTION----------------------------------------------------------------//
+
+int main() {
+    clearScreen();
+    welcomeHeading();
+    string reply;
+
+    while (true) {
+        cout << "1. Administrator Panel" << endl;
+        cout << "2. User Panel" << endl;
+        cout << "3. Exit Program" << endl;
+        cout << endl;
+
+        cout << "Select Option: ";
+        cin >> reply;
+
+        if (reply == "1") {
+            string userType = "ADMIN";
+            if (login(ADMIN_NAME, ADMIN_PASSWORD, userType)) {
+                adminPanel();
+            }
+        }
+        else if (reply == "2") {
+            string userType = "USER";
+            if (login(USER_NAME, USER_PASSWORD, userType)) {
+                userPanel();
+            }
+        }
+        else if (reply == "3") {
+            exit(0);
+        }
+        else {
+            cout << endl;
+            cout << "You entered an invalid input. Try again." << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+            cout << endl;
+            clearScreen();
+            welcomeHeading();
+        }
+    }
+    return 0;
+}
