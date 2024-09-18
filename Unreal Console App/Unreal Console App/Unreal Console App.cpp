@@ -132,3 +132,52 @@ void shortLoading() {
         std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     }
 }
+
+//------------------------------------------------------------------Loading Error---------------------------------------------------------------//
+void loadingError() {
+    for (int i = 0; i < 5; ++i) {
+        if (i == 2) {
+            cout << "Please wait..." << endl;
+        }
+        else if (i == 3) {
+            cout << "Please wait..." << endl;
+        }
+        else if (i == 4) {
+            SetConsoleTextAttribute(consoleHandle, BACKGROUND_RED);
+            cout << "Invalid credentials. Try again." << endl;
+            SetConsoleTextAttribute(consoleHandle, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+        }
+        else {
+            cout << "Verifying..." << endl;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    }
+}
+
+void loggingOut() {
+    for (int i = 0; i < 2; ++i) {
+        if (i == 1) {
+            cout << "Logging out..." << endl;
+        }
+        else {
+            cout << "Please wait..." << endl;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        main();
+    }
+}
+
+void load() {
+    for (int i = 0; i < 1; i++) {
+        cout << "Loading. Please wait..." << endl;
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    }
+}
+
+void welcomeHeading() {
+    cout << "\t\t\t\t\t\t------------------------------------------------------" << endl;
+    cout << "\t\t\t\t\t\t\t Welcome to Unreal Mobile Money Services" << endl;
+    cout << "\t\t\t\t\t\t------------------------------------------------------" << endl;
+    cout << endl;
+}
