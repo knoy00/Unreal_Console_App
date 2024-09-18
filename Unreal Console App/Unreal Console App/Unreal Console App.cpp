@@ -237,3 +237,22 @@ bool login(string& correctName, string& correctPassword, const string& userType)
     return false;
 }
 
+void adminPanel() {
+    int input;
+    while (true) {
+        clearScreen();
+        adminHeader();
+        cout << "Administrator Panel" << endl;
+        cout << "1. Add New User" << endl;
+        cout << "2. Log Out" << endl;
+        cout << endl;
+
+        cout << "Select Option: ";
+        cin >> input;
+
+        if (input == 2) {
+            loggingOut();
+            break;
+        }
+    }
+}
