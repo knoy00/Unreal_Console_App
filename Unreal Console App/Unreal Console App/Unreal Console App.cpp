@@ -182,6 +182,14 @@ void welcomeHeading() {
     cout << endl;
 }
 
+void adminHeader() {
+    cout << "\t\t\t\t\t Administrator Panel" << endl;
+}
+
+void loginHeader() {
+    cout << "\t\t\t\t\t\t\t\t\t User Panel" << endl;
+}
+
 bool login(string& correctName, string& correctPassword, const string& userType) {
     int attempt = 0;
     string input_name;
@@ -228,3 +236,4 @@ bool login(string& correctName, string& correctPassword, const string& userType)
     cout << "You exhausted your trial attempts." << endl;
     return false;
 }
+
