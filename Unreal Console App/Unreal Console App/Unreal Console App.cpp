@@ -181,3 +181,50 @@ void welcomeHeading() {
     cout << "\t\t\t\t\t\t------------------------------------------------------" << endl;
     cout << endl;
 }
+
+bool login(string& correctName, string& correctPassword, const string& userType) {
+    int attempt = 0;
+    string input_name;
+    string input_pass;
+
+    while (attempt < 3) {
+        welcomeHeading();
+        if (userType == "ADMIN") {
+            adminHeader();
+        }
+        else {
+            loginHeader();
+        }
+        cout << endl;
+
+        cout << "Enter " << userType << " name" << endl;
+        cout << "Enter name: ";
+        cin >> input_name;
+        cout << endl;
+
+        cout << "Enter " << userType << " password" << endl;
+        cout << "Enter password: ";
+        cin >> input_pass;
+        cout << endl;
+
+        if (input_name == correctName && input_pass == correctPassword) {
+            loading();
+            welcomeHeading();
+            if (userType == "ADMIN") {
+                adminHeader();
+                cout << "Welcome back, " << correctName << endl;
+            }
+            else {
+                loginHeader();
+                cout << "Welcome back, " << correctName << endl;
+            }
+            return true;
+        }
+        else {
+            loadingError();
+            attempt++;
+        }
+    }
+    cout << "You exhausted your trial attempts." << endl;
+    return false;
+}
