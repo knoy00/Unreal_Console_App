@@ -256,3 +256,101 @@ void adminPanel() {
         }
     }
 }
+
+void userPanel() {
+    string input;
+    while (true) {
+        clearScreen();
+        cout << "User Panel" << endl;
+
+        cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
+
+        cout << endl;
+
+        cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Welcome back, " << USER_NAME << endl;
+        cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Your current balance is GHS " << userBalance() << endl;
+        cout << endl;
+        cout << "1. Send Money" << endl;
+        cout << "2. Withdraw Money" << endl;
+        cout << "3. Deposit Money" << endl;
+        cout << "4. Financial Services" << endl;
+        cout << "5. My Account" << endl;
+        cout << "6. Log Out" << endl;
+        cout << endl;
+
+        cout << "Select Option: ";
+        cin >> input;
+
+        if (input == "1") {
+            sendMoney();
+        }
+        else if (input == "2") {
+            withdrawMoney();
+        }
+        else if (input == "3") {
+            depositMoney();
+        }
+        else if (input == "4") {
+            financialServices();
+        }
+        else if (input == "5") {
+            myAccount();
+        }
+        else if (input == "6") {
+            loggingOut();
+            break;
+        }
+        else {
+            cout << endl;
+            cout << "Invalid option. Please try again." << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        }
+    }
+}
+
+//--------------------------------------------------------------Send money options and functios------------------------------------------------------------------------//
+void sendMoney() {
+    clearScreen();
+    cout << "--------------------------------------------------------------------- SEND MONEY ---------------------------------------------------------------------------" << endl;
+    cout << endl;
+
+    cout << "1. FastMO Cash User" << endl;
+    cout << "2. Mobile Network" << endl;
+    cout << "3. To Bank Account" << endl;
+    cout << "4. Unregistered FastMO Cash User" << endl;
+    cout << "5. Favorites" << endl;
+    cout << "0. Go Back" << endl;
+
+    while (true) {
+        string choice;
+        cout << endl;
+        cout << "Select option: ";
+        cin >> choice;
+
+        if (choice == "1") {
+            fastMO();
+        }
+        else if (choice == "2") {
+            otherNetworks();
+        }
+        else if (choice == "3") {
+            transactToBank();
+        }
+        else if (choice == "4") {
+            cout << "Sending money to Unregistered FastMO Cash User..." << endl;
+        }
+        else if (choice == "5") {
+            favorites();
+        }
+        else if (choice == "0") {
+            userPanel();
+        }
+        else {
+            cout << endl;
+            cout << "Invalid option. Please try again." << endl;
+            cout << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        }
+    }
+
+}
