@@ -584,3 +584,10 @@ void otherNetworks() {
     }
 
 }
+
+
+void bankAccount() {
+    cout << "---------------------------------------------------------------- Send To Bank Account ------------------------------------------------------------------" << endl;
+    cout << endl;
+    transactToBank();
+}
