@@ -591,3 +591,12 @@ void bankAccount() {
     cout << endl;
     transactToBank();
 }
+
+//-----------------------------------------------------------------Function to clear screen-----------------------------------------------------------------------//
+void clearScreen() {
+#ifdef _WIN32
+    system("CLS");
+#else
+    cout << "\033[2J\033[1;1H";
+#endif
+}
