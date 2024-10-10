@@ -1268,7 +1268,6 @@ void favorites() {
                                     cout << endl;
 
                                     SetConsoleTextAttribute(consoleHandle, BACKGROUND_RED);
-                                    cout << "Incorrect PIN.";
                                     SetConsoleTextAttribute(consoleHandle, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
 
                                     cout << " You have " << (3 - count) << " tries left." << endl;
@@ -1301,5 +1300,170 @@ void favorites() {
             }
         }
 
+    }
+}
+
+//----------------------------------------------------------------Function for My Account Menu----------------------------------------------------------//
+void myAccount() {
+
+myAccount:
+    clearScreen();
+    cout << endl;
+    cout << endl;
+    cout << "---------------------------------------------------------------- My Account -------------------------------------------------------------------------------" << endl;
+    cout << endl;
+
+    cout << "1. Add new favorite" << endl;
+    cout << "2. Remove contact from favorite" << endl;
+    cout << "3. Change username or password" << endl;
+    cout << "4. Check balance" << endl;
+    cout << "0. Go back" << endl;
+
+    while (true) {
+        int choice;
+        cout << endl;
+        cout << "Enter here: ";
+        cin >> choice;
+        cin.ignore();
+
+        if (choice == 1) {
+            cout << endl;
+            cout << "Enter name" << endl;
+
+            while (true) {
+                addFavorite();
+            }
+        }
+        else if (choice == 2) {
+            deleteFavorite(favoriteNumbers);
+            //remove contact
+        }
+
+        else if (choice == 3) {
+            //change credentials
+            int changeCred;
+            cout << endl;
+            cout << "1. Change password" << endl;
+            cout << "2. Change username" << endl;
+            cout << endl;
+
+            while (true) {
+                cout << "Enter here: ";
+                cin >> changeCred;
+
+                if (changeCred == 1) {
+                    cout << endl;
+                    cout << "Enter old password" << endl;
+
+                    int count = 0;
+                    while (count < 3) {
+                        string oldPass;
+                        cout << "Enter here: ";
+                        cin >> oldPass;
+                        if (oldPass == USER_PASSWORD) {
+
+                        Newpass:
+                            string newPass;
+                            cout << endl;
+                            cout << "Enter your new password" << endl;
+                            cout << "Enter here: ";
+                            cin >> newPass;
+
+                            while (true) {
+                                string confirmNewPass;
+                                cout << endl;
+                                cout << "Re-enter your new password" << endl;
+                                cout << "Enter here: ";
+                                cin >> confirmNewPass;
+
+                                if (newPass == confirmNewPass) {
+                                    USER_PASSWORD = newPass;
+                                    cout << endl;
+                                    cout << "New password created!" << endl;
+                                    std::this_thread::sleep_for(std::chrono::milliseconds(1300));
+                                    cout << endl;
+                                    cout << "Returning to main menu. Please wait." << endl;
+                                    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                                    userPanel();
+                                }
+
+                                else {
+                                    cout << endl;
+                                    cout << "Password did not match. Try again" << endl;
+                                    goto Newpass;
+                                }
+                            }
+                        }
+                        else {
+                            count++;
+                            cout << endl;
+                            cout << "Invalid Pin. Please try again." << endl;
+                            cout << "You have " << 3 - count << " tries left" << endl;
+                        }
+                    }
+                    cout << endl;
+                    cout << "Max attempts reached. Logging out" << endl;
+                    loggingOut();
+                }
+                else if (changeCred == 2) {
+                    string newUsername;
+                    cout << endl;
+                    cout << "Enter your new username" << endl;
+                    cout << "Enter here: ";
+                    cin >> newUsername;
+                    USER_NAME = newUsername;
+                    cout << endl;
+                    cout << "New username created!" << endl;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1300));
+                    cout << endl;
+                    cout << "Returning to main menu. Please wait" << endl;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                    userPanel();
+                }
+
+                else {
+                    cout << endl;
+                    cout << "Invalid input. Try again" << endl;
+                }
+            }
+        }
+
+        else if (choice == 4) {
+            clearScreen();
+            cout << endl;
+            cout << "1. Your Unreal account balance is GHS" << userBalance() << endl;
+            cout << endl;
+
+            cout << "2. Your bank account is GHS" << bankBalance << endl;
+            cout << endl;
+
+            cout << "3. Your Mobile Money account balance is GHS" << momoBalance << endl;
+            cout << endl;
+            cout << endl;
+            cout << endl;
+            cout << endl;
+
+            cout << "Press 0 to go back" << endl;
+
+            while (true) {
+                char goBack;
+                cout << "Enter here: "; cin >> goBack;
+
+                if (goBack == '0') {
+                    goto myAccount;
+                }
+                else {
+                    cout << endl;
+                    cout << "Invalid input. Try again." << endl;
+                }
+            }
+        }
+        else if (choice == 0) {
+            userPanel();
+        }
+        else {
+            cout << endl;
+            cout << "Invalid input. Try again" << endl;
+        }
     }
 }
