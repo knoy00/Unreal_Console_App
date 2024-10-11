@@ -1467,3 +1467,225 @@ myAccount:
         }
     }
 }
+
+//----------------------------------------------------------------Function to deposit money-------------------------------------------------------------//
+void depositMoney() {
+    while (true) {
+        clearScreen();
+        cout << "------------------------------------------------------------------- DEPOSIT MONEY --------------------------------------------------------------------------" << endl;
+        cout << endl;
+        cout << "1. Deposit from Mobile Money" << endl;
+        cout << "2. Deposit from Bank" << endl;
+        cout << "0. Go back" << endl;
+        cout << endl;
+        string choice;
+        cout << "Select option: ";
+        cin >> choice;
+
+        if (choice == "1") {
+            cout << endl;
+            cout << "Deposit from:" << endl;
+            cout << "1. Own Mobile Money Number" << endl;
+            cout << "2. Different Mobile Money Number" << endl;
+            cout << "3. Go back" << endl;
+
+            while (true) {
+                string mobileOption;
+                cout << "Select Option: ";
+                cin >> mobileOption;
+
+                if (mobileOption == "1") {
+
+                Deposit_Amount:
+                    while (true) {
+
+                        cout << endl;
+                        cout << "Enter amount" << endl;
+                        cout << "Enter here: ";
+                        double amount;
+                        cin >> amount;
+
+                        if (amount <= momoBalance) {
+                            cout << endl;
+                            cout << "Wait for the prompt on your mobile device and enter your pin" << endl;
+                            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+                            cout << endl;
+                            cout << endl;
+                            currentUserBalance += amount;
+                            momoBalance -= amount;
+                            cout << "Transaction complete. Your deposit of GHS" << amount << " into your unreal account" << endl;
+                            cout << "Your current balance is GHS" << currentUserBalance << "." << endl;
+                            cout << endl;
+                            cout << "1. Perform another transaction" << endl;
+                            cout << "2. Return to main menu" << endl;
+
+                            while (true) {
+                                string choice;
+                                cout << endl;
+                                cout << "Select option" << endl;
+                                cin >> choice;
+
+                                if (choice == "1") {
+                                    goto Deposit_Amount;
+                                }
+
+                                else if (choice == "2") {
+                                    cout << endl;
+                                    cout << endl;
+                                    cout << "Returning to main menu. Please wait" << endl;
+                                    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                                    userPanel();
+                                }
+
+                                else {
+                                    cout << endl;
+                                    cout << "Invalid input. Try again" << endl;
+                                }
+                            }
+                        }
+
+                        else {
+                            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                            cout << "Transaction failed. Try again? (Y / N)" << endl;
+
+                            while (true) {
+                                string tryAgain;
+                                cout << endl;
+                                cout << "Select Option: ";
+                                cin >> tryAgain;
+
+                                if (tryAgain == "y" || tryAgain == "Y") {
+                                    goto Deposit_Amount;
+                                }
+
+                                else if (tryAgain == "n" || tryAgain == "N") {
+                                    cout << endl;
+                                    cout << endl;
+                                    cout << "Returning to main menu. Please wait" << endl;
+                                    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                                    userPanel();
+                                }
+
+                                else {
+                                    cout << endl;
+                                    cout << "Invalid input. Try again" << endl;
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                else if (mobileOption == "2") {
+
+                }
+
+                else if (mobileOption == "3") {
+                    depositMoney();
+                }
+
+                else {
+                    cout << endl;
+                    cout << "Invalid input. Try again" << endl;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                }
+
+
+            }
+        }
+
+        else if (choice == "2") {
+        Deposit_From_Bank:
+            while (true) {
+
+                cout << endl;
+                cout << "Enter amount" << endl;
+                cout << "Enter here: ";
+                double amount;
+                cin >> amount;
+
+                if (amount <= bankBalance) {
+                    cout << endl;
+                    cout << "Wait for the prompt on your mobile device and enter your pin" << endl;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+                    cout << endl;
+                    cout << endl;
+                    currentUserBalance += amount;
+                    bankBalance -= amount;
+                    cout << "Transaction complete. Your deposit of GHS" << amount << " into your unreal account" << endl;
+                    cout << "Your current balance is GHS" << currentUserBalance << "." << endl;
+                    cout << endl;
+                    cout << "1. Perform another transaction" << endl;
+                    cout << "2. Return to main menu" << endl;
+
+                    while (true) {
+                        string choice;
+                        cout << endl;
+                        cout << "Select option" << endl;
+                        cin >> choice;
+
+                        if (choice == "1") {
+                            goto Deposit_From_Bank;
+                        }
+
+                        else if (choice == "2") {
+                            cout << endl;
+                            cout << endl;
+                            cout << "Returning to main menu. Please wait" << endl;
+                            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                            userPanel();
+                        }
+
+                        else {
+                            cout << endl;
+                            cout << "Invalid input. Try again" << endl;
+                        }
+                    }
+                }
+
+                else {
+                    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                    cout << "Transaction failed. Try again? (Y / N)" << endl;
+
+                    while (true) {
+                        string tryAgain;
+                        cout << endl;
+                        cout << "Select Option: ";
+                        cin >> tryAgain;
+
+                        if (tryAgain == "Y" || tryAgain == "y") {
+                            goto Deposit_From_Bank;
+                        }
+
+                        else if (tryAgain == "N" || tryAgain == "n") {
+                            cout << endl;
+                            cout << endl;
+                            cout << "Returning to main menu. Please wait" << endl;
+                            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                            userPanel();
+                        }
+
+                        else {
+                            cout << endl;
+                            cout << "Invalid input. Try again" << endl;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        else if (choice == "0") {
+            userPanel();
+        }
+
+        else {
+            cout << endl;
+            cout << "Invalid input. Try again" << endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        }
+    }
+
+}
